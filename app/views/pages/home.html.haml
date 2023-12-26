@@ -1,0 +1,22 @@
+%h1 тестовые кнопки
+%div{class: "home", data: {controller: "hello"}}
+  %p Приветсвуем на стороне браузера 
+  %input{data: {hello_target: "name"}}
+  %button{data: {action: "click->hello#greet"}} Greet
+  %p{data: {hello_target: "output"}}
+  
+%div{class: "home", data: {controller: "clipboard"}} 
+  %p Можно скопировать текст на стороне браузера
+  %input{data: {clipboard_target: "source"}}
+  %button{data: {action: "click->clipboard#copy"}} Copy
+  %p{data: {clipboard_target: "output"}}
+
+%div.home
+  %p Тут мы отправляем задачку
+  = button_to 'Job', pages_hard_job_path, method: :post
+  - if flash[:answer]
+    %div
+      %p= flash[:answer]
+
+%turbo-frame{id: "popup"}
+  = link_to 'Открыть всплывающее окно', popup_path, data: { turbo_frame: 'popup' }
